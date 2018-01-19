@@ -1,0 +1,114 @@
+###
+OFFSET
+功能
+设置绘制线条的偏移量。
+语法规则
+OFFSET <偏移量:毫米>
+code 
+WIDTH 6
+CIRC 10
+OFFSET -3 //笔画向内偏移3mm
+GO 40
+CIRC 10
+OFFSET 3
+GO -80
+CIRC 10
+###
+OVAL
+功能
+以当前游标为中心绘制一个椭圆
+语法规则
+OVAL <半长径:毫米>, <半短径:毫米>
+code
+OVAL 30, 20 //半长泾30mm，半短径20mm的椭圆
+###
+PITCHTO
+功能
+草图的俯仰姿态旋转至给定角度
+语法规则
+PITCHTO <旋转角度:度>
+code  
+GOTO 12, 12 //游标移动到坐标（12,12）
+ARC 10, 180 //画一个半圆
+BODY
+	PITCHTO 90 //游标俯仰姿态转动至90度
+	LINK //与上一三维模型位置连接形成实体
+	YAWTO 90 //游标水平姿态转动至90度
+	LINK
+	ROLLTO 45 //游标转动姿态转动至45度
+	LINK
+DONE
+###
+POP
+功能
+将上一次的备份（游标位置和设置等）恢复到当前状态
+code 
+GOTO 10, 10
+WIDTH 10
+PUSH //备份当前状态
+CLEAR
+GOTO -100, -100
+WIDTH 0.1
+NORMAL 90, 90, 90
+WARPX 300
+POP //将当前状态恢复到上次备份时的状态
+LINE 100
+###
+PUSH
+功能
+将当前状态（游标位置和设置等）备份
+code 
+GOTO 10, 10
+WIDTH 10
+PUSH //备份当前状态
+CLEAR
+GOTO -100, -100
+WIDTH 0.1
+NORMAL 90, 90, 90
+WARPX 300
+POP //将当前状态恢复到上次备份时的状态
+LINE 100
+###
+PYRAMID
+功能
+以当前草图作为底面向上拉伸绘制棱锥
+语法规则
+PYRIMID <高度:毫米>
+code  
+NGON 3, 20
+FILL //若不使用后面的锥形为空心
+PYRAMID 20 //以当前草图为底面向上拉伸20mm绘制锥形，完成后草图会缩到一个点，并且拉伸的形状会向草图原点聚集
+MOVE 50, 0, 0
+NPYRAMID 3, 20, 20 //以外接圆半径20mm的三角形为底面拉伸一个高20mm的三棱锥
+MOVE 50, 0, 0
+CONE 15, 20 //绘制底面半径15mm，高20mm的圆锥
+###
+RECT
+功能
+以当前游标为中心绘制一个矩形
+语法规则
+RECT <长:毫米>, <宽:毫米>
+code  
+RECT 30, 20 //长30mm,宽20mm的矩形
+RRECT 50, 30, 5 
+//长50mm,宽30mm，圆角半径5mm的圆角矩形
+SQUARE 60 //边长60mm的正方形
+RSQUARE 80, 5 
+//边长80mm,圆角半径5mm的圆角正方形
+###
+ROLLTO
+功能
+草图围绕自身上下轴旋转至给定角度
+语法规则
+ROLLTO <旋转角度:度>
+code
+GOTO 12, 12 //游标移动到坐标（12,12）
+ARC 10, 180 //画一个半圆
+BODY
+	PITCHTO 90 //游标俯仰姿态转动至90度
+	LINK //与上一三维模型位置连接形成实体
+	YAWTO 90 //游标水平姿态转动至90度
+	LINK
+	ROLLTO 45 //游标转动姿态转动至45度
+	LINK
+DONE
